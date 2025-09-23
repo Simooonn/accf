@@ -325,6 +325,8 @@ pnpm version
 
 # Build and publish to npm
 pnpm release
+
+pnpm publish --no-git-checks --otp=
 ```
 
 ---

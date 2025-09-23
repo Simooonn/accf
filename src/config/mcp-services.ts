@@ -77,6 +77,16 @@ export const MCP_SERVICE_CONFIGS: McpServiceConfig[] = [
       },
     },
   },
+  {
+    id: 'memory',
+    requiresApiKey: false,
+    config: {
+      type: 'stdio',
+      command: 'npx',
+      args: ['-y', 'memory-mcp@latest'],
+      env: {},
+    },
+  },
 ]
 
 /**
@@ -117,6 +127,11 @@ export async function getMcpServices(): Promise<McpService[]> {
       name: i18n.t('mcp:services.exa.name'),
       description: i18n.t('mcp:services.exa.description'),
       apiKeyPrompt: i18n.t('mcp:services.exa.apiKeyPrompt'),
+    },
+    {
+      id: 'memory',
+      name: i18n.t('mcp:services.memory.name'),
+      description: i18n.t('mcp:services.memory.description'),
     },
   ]
 

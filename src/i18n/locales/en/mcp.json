@@ -14,6 +14,8 @@
   "services.exa.name": "Exa AI Search",
   "services.mcp-deepwiki.description": "Query GitHub repository documentation and examples",
   "services.mcp-deepwiki.name": "DeepWiki",
+  "services.memory.description": "Provides persistent storage allowing agents to remember key information, context, and user preferences across sessions",
+  "services.memory.name": "Long-term Memory",
   "services.spec-workflow.description": "Structured feature development workflow, systematic approach from requirements to implementation",
   "services.spec-workflow.name": "Spec Workflow",
   "apiKeyApprovalFailed": "Failed to manage API key approval status"
