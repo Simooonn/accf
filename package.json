@@ -1,21 +1,21 @@
 {
-  "name": "zcf",
+  "name": "accf",
   "type": "module",
-  "version": "2.12.13",
+  "version": "3.0.1",
   "packageManager": "pnpm@10.16.1",
-  "description": "Zero-Config Claude-Code Flow - One-click configuration tool for Claude Code",
+  "description": "Claude-Code Flow - One-click configuration tool for Claude Code",
   "author": {
-    "name": "Miao Da",
-    "email": "ufo025174@gmail.com",
-    "url": "https://github.com/WitMiao"
+    "name": "Ace",
+    "email": "mwu@ominisolu.com",
+    "url": "https://github.com/Simooonn"
   },
   "license": "MIT",
-  "homepage": "https://github.com/UfoMiao/zcf",
+  "homepage": "https://github.com/Simooonn/accf",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/UfoMiao/zcf.git"
+    "url": "git+https://github.com/Simooonn/accf.git"
   },
-  "bugs": "https://github.com/UfoMiao/zcf/issues",
+  "bugs": "https://github.com/Simooonn/accf/issues",
   "keywords": [
     "claude",
     "claude-code",
@@ -24,6 +24,7 @@
     "setup",
     "zero-config",
     "zcf",
+    "accf",
     "anthropic",
     "ai",
     "automation",
@@ -33,7 +34,7 @@
   "module": "dist/index.mjs",
   "types": "dist/index.d.mts",
   "bin": {
-    "zcf": "bin/zcf.mjs"
+    "accf": "bin/zcf.mjs"
   },
   "files": [
     "bin",
