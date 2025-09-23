@@ -18,6 +18,12 @@
   "services.memory.name": "长期记忆",
   "services.sequential-thinking.description": "引导代理进行更结构化、逻辑化的思考，将复杂问题分解为有序步骤",
   "services.sequential-thinking.name": "顺序思维增强",
+  "services.mcp-feedback-enhanced.description": "建立一个交互式反馈机制，允许用户在任务执行过程中进行干预和指导",
+  "services.mcp-feedback-enhanced.name": "增强反馈循环",
+  "services.browsermcp.description": "提供一个轻量级的浏览器交互接口",
+  "services.browsermcp.name": "通用浏览器控制",
+  "services.shrimp-task-manager.description": "一个专用的任务管理服务，用于更精细地跟踪和控制自动化任务的执行状态",
+  "services.shrimp-task-manager.name": "任务管理",
   "services.spec-workflow.description": "规范化特性开发工作流程，从需求到实现的系统化方法",
   "services.spec-workflow.name": "Spec 工作流",
   "apiKeyApprovalFailed": "API密钥批准状态管理失败"

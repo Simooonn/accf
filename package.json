@@ -1,7 +1,7 @@
 {
   "name": "accf",
   "type": "module",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "packageManager": "pnpm@10.16.1",
   "description": "Claude-Code Flow - One-click configuration tool for Claude Code",
   "author": {

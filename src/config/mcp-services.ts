@@ -97,6 +97,36 @@ export const MCP_SERVICE_CONFIGS: McpServiceConfig[] = [
       env: {},
     },
   },
+  {
+    id: 'mcp-feedback-enhanced',
+    requiresApiKey: false,
+    config: {
+      type: 'stdio',
+      command: 'npx',
+      args: ['-y', 'mcp-feedback-enhanced@latest'],
+      env: {},
+    },
+  },
+  {
+    id: 'browsermcp',
+    requiresApiKey: false,
+    config: {
+      type: 'stdio',
+      command: 'npx',
+      args: ['-y', 'browsermcp@latest'],
+      env: {},
+    },
+  },
+  {
+    id: 'shrimp-task-manager',
+    requiresApiKey: false,
+    config: {
+      type: 'stdio',
+      command: 'npx',
+      args: ['-y', 'shrimp-task-manager@latest'],
+      env: {},
+    },
+  },
 ]
 
 /**
@@ -147,6 +177,21 @@ export async function getMcpServices(): Promise<McpService[]> {
       id: 'sequential-thinking',
       name: i18n.t('mcp:services.sequential-thinking.name'),
       description: i18n.t('mcp:services.sequential-thinking.description'),
+    },
+    {
+      id: 'mcp-feedback-enhanced',
+      name: i18n.t('mcp:services.mcp-feedback-enhanced.name'),
+      description: i18n.t('mcp:services.mcp-feedback-enhanced.description'),
+    },
+    {
+      id: 'browsermcp',
+      name: i18n.t('mcp:services.browsermcp.name'),
+      description: i18n.t('mcp:services.browsermcp.description'),
+    },
+    {
+      id: 'shrimp-task-manager',
+      name: i18n.t('mcp:services.shrimp-task-manager.name'),
+      description: i18n.t('mcp:services.shrimp-task-manager.description'),
     },
   ]
 
