@@ -16,6 +16,8 @@
   "services.mcp-deepwiki.name": "DeepWiki",
   "services.memory.description": "Provides persistent storage allowing agents to remember key information, context, and user preferences across sessions",
   "services.memory.name": "Long-term Memory",
+  "services.sequential-thinking.description": "Guides agents toward more structured, logical thinking by breaking complex problems into ordered steps",
+  "services.sequential-thinking.name": "Sequential Thinking Enhancement",
   "services.spec-workflow.description": "Structured feature development workflow, systematic approach from requirements to implementation",
   "services.spec-workflow.name": "Spec Workflow",
   "apiKeyApprovalFailed": "Failed to manage API key approval status"

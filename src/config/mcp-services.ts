@@ -87,6 +87,16 @@ export const MCP_SERVICE_CONFIGS: McpServiceConfig[] = [
       env: {},
     },
   },
+  {
+    id: 'sequential-thinking',
+    requiresApiKey: false,
+    config: {
+      type: 'stdio',
+      command: 'npx',
+      args: ['-y', 'sequential-thinking-mcp@latest'],
+      env: {},
+    },
+  },
 ]
 
 /**
@@ -132,6 +142,11 @@ export async function getMcpServices(): Promise<McpService[]> {
       id: 'memory',
       name: i18n.t('mcp:services.memory.name'),
       description: i18n.t('mcp:services.memory.description'),
+    },
+    {
+      id: 'sequential-thinking',
+      name: i18n.t('mcp:services.sequential-thinking.name'),
+      description: i18n.t('mcp:services.sequential-thinking.description'),
     },
   ]
 
