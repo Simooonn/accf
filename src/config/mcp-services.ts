@@ -93,7 +93,7 @@ export const MCP_SERVICE_CONFIGS: McpServiceConfig[] = [
     config: {
       type: 'stdio',
       command: 'npx',
-      args: ['-y', 'sequential-thinking-mcp@latest'],
+      args: ['-y', '@modelcontextprotocol/server-sequential-thinking'],
       env: {},
     },
   },
