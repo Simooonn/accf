@@ -26,5 +26,8 @@
   "services.shrimp-task-manager.name": "Task Manager",
   "services.spec-workflow.description": "Structured feature development workflow, systematic approach from requirements to implementation",
   "services.spec-workflow.name": "Spec Workflow",
+  "services.figma-developer.description": "Interact with Figma design files to access design specs, component information, and assets",
+  "services.figma-developer.name": "Figma Developer Tools",
+  "services.figma-developer.apiKeyPrompt": "Enter Figma API Key",
   "apiKeyApprovalFailed": "Failed to manage API key approval status"
 }

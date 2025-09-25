@@ -117,6 +117,19 @@ export const MCP_SERVICE_CONFIGS: McpServiceConfig[] = [
       env: {},
     },
   },
+  {
+    id: 'figma-developer',
+    requiresApiKey: true,
+    apiKeyEnvVar: 'FIGMA_API_KEY',
+    config: {
+      type: 'stdio',
+      command: 'npx',
+      args: ['-y', 'figma-developer-mcp', '--figma-api-key=YOUR_FIGMA_API_KEY'],
+      env: {
+        FIGMA_API_KEY: 'YOUR_FIGMA_API_KEY',
+      },
+    },
+  },
 ]
 
 /**
@@ -177,6 +190,12 @@ export async function getMcpServices(): Promise<McpService[]> {
       id: 'shrimp-task-manager',
       name: i18n.t('mcp:services.shrimp-task-manager.name'),
       description: i18n.t('mcp:services.shrimp-task-manager.description'),
+    },
+    {
+      id: 'figma-developer',
+      name: i18n.t('mcp:services.figma-developer.name'),
+      description: i18n.t('mcp:services.figma-developer.description'),
+      apiKeyPrompt: i18n.t('mcp:services.figma-developer.apiKeyPrompt'),
     },
   ]
 

@@ -26,5 +26,8 @@
   "services.shrimp-task-manager.name": "任务管理",
   "services.spec-workflow.description": "规范化特性开发工作流程，从需求到实现的系统化方法",
   "services.spec-workflow.name": "Spec 工作流",
+  "services.figma-developer.description": "与 Figma 设计文件进行交互，获取设计规范、组件信息和资源",
+  "services.figma-developer.name": "Figma 开发者工具",
+  "services.figma-developer.apiKeyPrompt": "请输入 Figma API Key",
   "apiKeyApprovalFailed": "API密钥批准状态管理失败"
 }
