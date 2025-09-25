@@ -118,6 +118,21 @@ export const MCP_SERVICE_CONFIGS: McpServiceConfig[] = [
     },
   },
   {
+    id: 'mcp-feedback-enhanced',
+    requiresApiKey: false,
+    config: {
+      type: 'stdio',
+      command: 'uvx',
+      args: ['mcp-feedback-enhanced@latest'],
+      env: {
+        MCP_DEBUG: 'false',
+        MCP_WEB_HOST: '127.0.0.1',
+        MCP_WEB_PORT: '8765',
+        MCP_LANGUAGE: 'zh-CN',
+      },
+    },
+  },
+  {
     id: 'figma-developer',
     requiresApiKey: true,
     apiKeyEnvVar: 'FIGMA_API_KEY',
@@ -190,6 +205,11 @@ export async function getMcpServices(): Promise<McpService[]> {
       id: 'shrimp-task-manager',
       name: i18n.t('mcp:services.shrimp-task-manager.name'),
       description: i18n.t('mcp:services.shrimp-task-manager.description'),
+    },
+    {
+      id: 'mcp-feedback-enhanced',
+      name: i18n.t('mcp:services.mcp-feedback-enhanced.name'),
+      description: i18n.t('mcp:services.mcp-feedback-enhanced.description'),
     },
     {
       id: 'figma-developer',
