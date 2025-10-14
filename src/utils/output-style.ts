@@ -34,6 +34,11 @@ const OUTPUT_STYLES: OutputStyle[] = [
     isCustom: true,
     filePath: 'laowang-engineer.md',
   },
+  {
+    id: 'ojousama-engineer',
+    isCustom: true,
+    filePath: 'ojousama-engineer.md',
+  },
   // Built-in styles (no template files)
   {
     id: 'default',
@@ -63,7 +68,7 @@ export async function copyOutputStyles(selectedStyles: string[], lang: Supported
   const currentFilePath = fileURLToPath(import.meta.url)
   const distDir = dirname(dirname(currentFilePath))
   const rootDir = dirname(distDir)
-  const templateDir = join(rootDir, 'templates', lang, 'output-styles')
+  const templateDir = join(rootDir, 'templates', 'claude-code', lang, 'output-styles')
 
   for (const styleId of selectedStyles) {
     const style = OUTPUT_STYLES.find(s => s.id === styleId)
@@ -141,6 +146,11 @@ export async function configureOutputStyle(
       id: 'nekomata-engineer',
       name: i18n.t('configuration:outputStyles.nekomata-engineer.name'),
       description: i18n.t('configuration:outputStyles.nekomata-engineer.description'),
+    },
+    {
+      id: 'ojousama-engineer',
+      name: i18n.t('configuration:outputStyles.ojousama-engineer.name'),
+      description: i18n.t('configuration:outputStyles.ojousama-engineer.description'),
     },
   ]
 

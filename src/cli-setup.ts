@@ -1,10 +1,11 @@
 import type { CAC } from 'cac'
-import type { SupportedLang } from './constants'
+import type { CodeToolType, SupportedLang } from './constants'
 import ansis from 'ansis'
 import { version } from '../package.json'
 import { ccr } from './commands/ccr'
 import { executeCcusage } from './commands/ccu'
 import { checkUpdates } from './commands/check-updates'
+import { configSwitchCommand } from './commands/config-switch'
 import { init } from './commands/init'
 import { showMainMenu } from './commands/menu'
 import { uninstall } from './commands/uninstall'
@@ -19,6 +20,7 @@ export interface CliOptions {
   aiOutputLang?: string
   force?: boolean
   skipPrompt?: boolean
+  codeType?: CodeToolType
   // Non-interactive parameters
   configAction?: string // default: backup
   apiType?: string
@@ -101,7 +103,7 @@ export function customizeHelp(sections: any[]): any[] {
   // Add custom header
   sections.unshift({
     title: '',
-    body: ansis.cyan.bold(`ZCF - Zero-Config Claude-Code Flow v${version}`),
+    body: ansis.cyan.bold(`ZCF - Zero-Config Code Flow v${version}`),
   })
 
   // Add commands section with aliases
@@ -147,6 +149,7 @@ export function customizeHelp(sections: any[]): any[] {
       `  ${ansis.green('--workflows, -w')} <list>    ${i18n.t('cli:help.optionDescriptions.workflows')} (${i18n.t('cli:help.defaults.prefix')} all workflows)`,
       `  ${ansis.green('--output-styles, -o')} <styles> ${i18n.t('cli:help.optionDescriptions.outputStyles')} (${i18n.t('cli:help.defaults.prefix')} all custom styles)`,
       `  ${ansis.green('--default-output-style, -d')} <style> ${i18n.t('cli:help.optionDescriptions.defaultOutputStyle')} (${i18n.t('cli:help.defaults.prefix')} engineer-professional)`,
+      `  ${ansis.green('--code-type, -T')} <type>   ${i18n.t('cli:help.optionDescriptions.codeToolType')} (claude-code, codex, cc=claude-code, cx=codex)`,
       `  ${ansis.green('--install-cometix-line, -x')} <value> ${i18n.t('cli:help.optionDescriptions.installStatuslineTool')} (${i18n.t('cli:help.defaults.prefix')} true)`,
     ].join('\n'),
   })
@@ -179,6 +182,14 @@ export function customizeHelp(sections: any[]): any[] {
       `  ${ansis.cyan('npx zcf check-updates')}     ${ansis.gray(`# ${i18n.t('cli:help.defaults.updateTools')}`)}`,
       `  ${ansis.cyan('npx zcf check')}`,
       '',
+      ansis.gray(`  # ${i18n.t('cli:help.exampleDescriptions.checkClaudeCode')}`),
+      `  ${ansis.cyan('npx zcf check --code-type claude-code')}`,
+      `  ${ansis.cyan('npx zcf check -T cc')}`,
+      '',
+      ansis.gray(`  # ${i18n.t('cli:help.exampleDescriptions.checkCodex')}`),
+      `  ${ansis.cyan('npx zcf check --code-type codex')}`,
+      `  ${ansis.cyan('npx zcf check -T cx')}`,
+      '',
       ansis.gray(`  # ${i18n.t('cli:help.exampleDescriptions.nonInteractiveModeCicd')}`),
       `  ${ansis.cyan('npx zcf i --skip-prompt --api-type api_key --api-key "sk-ant-..."')}`,
       `  ${ansis.cyan('npx zcf i --skip-prompt --all-lang zh-CN --api-type api_key --api-key "key"')}`,
@@ -210,6 +221,7 @@ export async function setupCommands(cli: CAC): Promise<void> {
     .option('--all-lang, -g <lang>', 'Set all language parameters to this value')
     .option('--config-lang, -c <lang>', 'Configuration language (zh-CN, en)')
     .option('--force, -f', 'Force overwrite existing configuration')
+    .option('--code-type, -T <codeType>', 'Select code tool type (claude-code, codex, cc, cx)')
     .action(await withLanguageResolution(async () => {
       await showMainMenu()
     }))
@@ -232,6 +244,7 @@ export async function setupCommands(cli: CAC): Promise<void> {
     .option('--output-styles, -o <styles>', `Comma-separated output styles (engineer-professional,nekomata-engineer,laowang-engineer,default,explanatory,learning), "skip" to skip all, "all" for all custom styles, ${i18n.t('cli:help.defaults.prefix')} all`)
     .option('--default-output-style, -d <style>', `Default output style, ${i18n.t('cli:help.defaults.prefix')} engineer-professional`)
     .option('--all-lang, -g <lang>', 'Set all language parameters to this value')
+    .option('--code-type, -T <codeType>', 'Select code tool type (claude-code, codex, cc, cx)')
     .option('--install-cometix-line, -x <value>', `Install CCometixLine statusline tool (true/false), ${i18n.t('cli:help.defaults.prefix')} true`)
     .action(await withLanguageResolution(async (options) => {
       await init(options)
@@ -267,6 +280,20 @@ export async function setupCommands(cli: CAC): Promise<void> {
       await executeCcusage(args)
     }))
 
+  // Config switch command - Switch Codex provider
+  cli
+    .command('config-switch [provider]', 'Switch Codex provider or list available providers')
+    .alias('cs')
+    .option('--lang, -l <lang>', 'ZCF display language (zh-CN, en)')
+    .option('--all-lang, -g <lang>', 'Set all language parameters to this value')
+    .option('--list', 'List available providers')
+    .action(await withLanguageResolution(async (provider, options) => {
+      await configSwitchCommand({
+        provider,
+        list: options.list,
+      })
+    }))
+
   // Uninstall command - Remove ZCF configurations and tools
   cli
     .command('uninstall', 'Remove ZCF configurations and tools')
@@ -284,8 +311,9 @@ export async function setupCommands(cli: CAC): Promise<void> {
     .alias('check')
     .option('--lang, -l <lang>', 'ZCF display language (zh-CN, en)')
     .option('--all-lang, -g <lang>', 'Set all language parameters to this value')
-    .action(await withLanguageResolution(async () => {
-      await checkUpdates()
+    .option('--code-type, -T <codeType>', 'Select code tool type (claude-code, codex, cc, cx)')
+    .action(await withLanguageResolution(async (options) => {
+      await checkUpdates(options)
     }))
 
   // Custom help

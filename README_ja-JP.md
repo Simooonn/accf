@@ -1,4 +1,4 @@
-# ZCF - Zero-Config Claude-Code Flow
+# ZCF - Zero-Config Code Flow
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
@@ -10,7 +10,9 @@
 
 [English](README.md) | [中文](README_zh-CN.md) | **日本語** | [更新履歴](CHANGELOG.md)
 
-> ゼロ設定、ワンクリックでClaude Code環境セットアップ - 多言語設定、インテリジェントプロキシシステム、パーソナライズされたAIアシスタント対応
+**✨ クイックリンク**: [Codexサポート](#-codexサポートv300新機能) | [BMadワークフロー](#-bmadワークフローv27新機能) | [Specワークフロー](#-specワークフローv2124新機能) | [Open Web Search](#-open-web-searchv2129新機能) | [CCRルーター](#-ccr-claude-code-router-サポートv28強化版) | [CCometixLine](#-ccometixlineサポートステータスバーツールv299新機能) | [出力スタイル](#-ai出力スタイルv212新機能)
+
+> ゼロ設定、ワンクリックで Claude Code & Codex 環境セットアップ - 多言語設定、インテリジェントプロキシシステム、パーソナライズされたAIアシスタント対応
 
 ![スクリーンショット](./src/assets/screenshot-en.webp)
 
@@ -28,7 +30,7 @@ npx zcf          # インタラクティブメニューを開き、必要に応�
 - `2` ワークフローのインポート（`zcf u`と同等）
 - `3` APIまたはCCRの設定 - API設定またはCCRプロキシセットアップ
 - `4` MCPの設定 - MCPサービスの設定と管理
-- `5` デフォルトモデルの設定 - デフォルトモデルの設定（opus/sonnet/opusplan/カスタム）
+- `5` デフォルトモデルの設定 - デフォルトモデルの設定（opus/sonnet/sonnet 1m/カスタム）
 - `6` AIメモリの設定 - AI出力言語とグローバル出力スタイルの設定
 - `7` 環境権限の設定 - 環境変数と権限設定のインポート
 - `R` Claude Code Router管理（v2.8.1強化）
@@ -41,8 +43,8 @@ npx zcf          # インタラクティブメニューを開き、必要に応�
 
 **モデル設定（オプション5）**：デフォルトのClaudeモデルを柔軟に設定：
 - **デフォルト**：Claude Codeが各タスクに最適なモデルを自動選択
-- **Opus**：Claude-3.5-Opusを専用使用（高トークン消費、慎重に使用してください）
-- **OpusPlan**：計画時にOpus、実装時にSonnetを使用（推奨バランス選択）
+- **Opus**：Claude-4.1-Opusを専用使用（高トークン消費、慎重に使用してください）
+- **Sonnet 1M**：1Mコンテキストウィンドウを持つSonnetモデルで大規模コンテキストタスクを処理
 - **カスタム**：メインタスクとクイックタスク用に独自のモデル名を指定（任意のカスタムモデル対応）
 
 **AIメモリ設定（オプション6）**：AIアシスタントをパーソナライズ：
@@ -122,9 +124,86 @@ npx zcf i --skip-prompt --all-lang ja --api-type api_key --api-key "sk-xxx" --ap
 | `--api-url, -u`              | カスタムAPI URL                          | URL文字列                                                                                              | いいえ                        | 公式API                                                                                |
 | `--mcp-services, -m`         | インストールするMCPサービス（複数選択、カンマ区切り） | `context7`, `open-websearch`, `spec-workflow`, `mcp-deepwiki`, `Playwright`, `exa`、または`skip`ですべてスキップ | いいえ                        | `all`                                                                                  |
 | `--workflows, -w`            | インストールするワークフロー（複数選択、カンマ区切り） | `commonTools`, `sixStepsWorkflow`, `featPlanUx`, `gitWorkflow`, `bmadWorkflow`、または`skip`ですべてスキップ | いいえ                        | `all`                                                                                  |
-| `--output-styles, -o`        | インストールする出力スタイル（複数選択、カンマ区切り） | `engineer-professional`, `nekomata-engineer`, `laowang-engineer`、または`skip`でインストールしない      | いいえ                        | `all`                                                                                  |
+| `--output-styles, -o`        | インストールする出力スタイル（複数選択、カンマ区切り） | `engineer-professional`, `nekomata-engineer`, `laowang-engineer`, `ojousama-engineer`、または`skip`でインストールしない      | いいえ                        | `all`                                                                                  |
 | `--default-output-style, -d` | デフォルト出力スタイル                     | 出力スタイルオプションと同じ、さらに組み込みスタイル：`default`, `explanatory`, `learning`                | いいえ                        | `engineer-professional`                                                                |
 | `--install-cometix-line, -x` | CCometixLineステータスバーツールのインストール | `true`, `false`                                                                                        | いいえ                        | `true`                                                                                 |
+
+#### 🤖 Codexサポート（v3.0.0+新機能）
+
+[Codex](https://www.npmjs.com/package/@openai/codex)はOpenAI公式のコード生成CLIツール。ZCFはClaude Codeと同じ設定の便利さでCodexの完全統合をサポートします。
+
+**主要機能：**
+
+- **統合ツール管理**：ZCFメニューを通じてClaude CodeとCodex間でシームレスに切り替え
+- **インテリジェント設定**：自動Codex CLIインストール、APIプロバイダー設定、MCPサービス統合
+- **包括的バックアップシステム**：すべての設定変更にタイムスタンプ付きバックアップとリカバリ機能を含む
+- **マルチプロバイダーサポート**：複数のAPIプロバイダー（OpenAI、カスタムエンドポイント）を設定し、簡単に切り替え
+- **システムプロンプト統合**：プロフェッショナルAIパーソナリティ（エンジニア、猫娘エンジニア、老王エンジニア）をインストール
+- **ワークフローテンプレート**：コード生成タスクに最適化された構造化開発ワークフローをインポート
+- **高度なアンインストーラー**：競合解決付きCodexコンポーネントの選択的削除
+
+**Codexクイックスタート：**
+
+ZCFメインメニューでCodexモードに切り替え：
+```bash
+npx zcf → Sを選択  # Claude CodeとCodex間で切り替え
+```
+
+またはCodex機能に直接アクセス：
+```bash
+# 完全Codex初期化
+npx zcf → 1を選択（Codexモードに切り替え後）
+
+# 個別Codex設定
+npx zcf → 3を選択  # Codex APIプロバイダーを設定
+npx zcf → 4を選択  # Codex MCPサービスを設定
+```
+
+**設定オプション：**
+
+1. **APIプロバイダー設定**：
+   - **公式ログイン**：OpenAI公式認証システムを使用
+   - **カスタムプロバイダー**：複数のAPIエンドポイントを設定し、プロバイダー切り替え
+   - **インクリメンタル管理**：既存設定に影響を与えずにプロバイダーを追加、編集、削除
+
+2. **システムプロンプトスタイル**：
+   - **プロフェッショナルエンジニア**：堅牢なコードのためのSOLID、KISS、DRY、YAGNI原則
+   - **猫娘エンジニア**：厳格な技術基準を持つ可愛い猫娘エンジニア
+   - **老王エンジニア**：低品質なコードを決して許さない短気な技術流
+
+3. **ワークフロー統合**：
+   - **6ステップワークフロー**：研究から最適化までの構造化開発プロセス
+   - **カスタムワークフロー**：タスク固有の開発テンプレートをインポートして設定
+   - **⚠️ 重要なお知らせ**：Codexプロンプトの制限により、`/workflow`コマンドは直接パラメータを渡すことができません。まず`/workflow`を使用し、その後のメッセージでタスクの説明を提供してください
+
+4. **MCPサービス**：既存のMCPサービスと完全に互換性があり、以下を含む：
+   - Context7、オープンWeb検索、Specワークフロー
+   - DeepWiki、Playwright、EXA検索
+   - APIキー管理付き自動サービス設定
+
+**ファイルの場所：**
+
+- 設定：`~/.codex/config.toml`
+- 認証：`~/.codex/auth.json`
+- システムプロンプト：`~/.codex/AGENTS.md`
+- ワークフロー：`~/.codex/prompts/`
+- バックアップ：`~/.codex/backup/`
+
+**コマンドライン操作：**
+
+Codex用の専用コマンドラインツール（v3.0.0+新機能）：
+
+```bash
+# Codex APIプロバイダー切り替え
+npx zcf config-switch     # インタラクティブプロバイダー選択
+npx zcf cs                # エイリアス使用
+npx zcf cs provider-name  # 指定プロバイダーに直接切り替え
+npx zcf cs --list         # 利用可能なプロバイダーをすべて表示
+```
+
+**ツール間の移行：**
+
+ZCFはClaude CodeとCodex間でのシームレスな切り替えを可能にし、設定とワークフロー設定を保持します。両方のツールは一貫した開発体験のために同じMCPサービスとワークフローテンプレートを共有します。
 
 #### 🎨 AI出力スタイル（v2.12+新機能）
 
@@ -223,6 +302,7 @@ CCRメニューオプション：
 CCRセットアップ完了後、ZCFは自動的にClaude CodeがCCRをAPIプロキシとして使用するよう設定。
 
 > **v2.9.1バージョンユーザーへの重要な注意**：以前にZCF v2.9.1バージョンでCCRを初期化した場合は、CCR初期化プロセスを再実行して、正しい`@musistudio/claude-code-router`パッケージがインストールされていることを確認してください。v2.9.1バージョンにはパッケージ名エラーの問題があり、後続バージョンで修正されています。
+
 
 #### 📊 CCometixLineサポート（ステータスバーツール）（v2.9.9+新機能）
 
@@ -327,7 +407,7 @@ npx zcf → +を選択
 ```bash
 $ npx zcf
 
- ZCF - Zero-Config Claude-Code Flow
+ ZCF - Zero-Config Code Flow
 
 ? Select ZCF display language / 选择ZCF显示语言 / ZCF表示言語を選択:
   ❯ 日本語
@@ -340,7 +420,7 @@ $ npx zcf
   2. ワークフローのインポート - ワークフロー関連ファイルのインポート/更新のみ
   3. APIの設定 - API URLと認証情報の設定（CCRプロキシサポート）
   4. MCPの設定 - MCPサービスの設定（Windows修正を含む）
-  5. デフォルトモデルの設定 - デフォルトモデルの設定（opus/sonnet/opusplan/カスタム）
+  5. デフォルトモデルの設定 - デフォルトモデルの設定（opus/sonnet/sonnet 1m/カスタム）
   6. Claudeグローバルメモリの設定 - AI出力言語と出力スタイルの設定
   7. 推奨環境変数と権限設定のインポート - プライバシー保護環境変数とシステム権限設定のインポート
 
@@ -361,18 +441,18 @@ $ npx zcf
 ### 完全初期化フロー（1を選択または`zcf i`を使用）
 
 ```bash
-? Claude Code設定言語を選択:
-  ❯ 日本語 (ja) - 日本語版（日本のユーザー向け）
-    简体中文 (zh-CN) - 中国語版（中国のユーザー向け）
-    English (en) - 英語版（トークン消費が少ない）
+? 設定言語を選択:
+  ❯ English (en) - 英語版（トークン消費が少ない）
+    简体中文 (zh-CN) - 中国語版（中国のユーザー向けカスタマイズ）
+    日本語 (ja) - 日本語版（日本のユーザー向けカスタマイズ）
 
 ? AI出力言語を選択:
   AIはこの言語であなたの質問に答えます
   ❯ 日本語
-    简体中文
     English
+    简体中文
     Custom
-    （日本語、フランス語、ドイツ語など多言語サポート）
+    （フランス語、ドイツ語など多言語サポート）
 
 ? Claude Codeがインストールされていないことを検出しました。自動的にインストールしますか？(Y/n)
 
@@ -385,16 +465,20 @@ $ npx zcf
     スキップ - 設定更新をスキップ
 
 ? API認証方法を選択
-  ❯ Auth Tokenを使用（OAuth認証）
+  ❯ 公式ログインを使用
+    公式認証システムを使用、API設定不要
+    Auth Tokenを使用（OAuth認証）
     OAuthまたはブラウザログインで取得したトークンに適用
     API Keyを使用（キー認証）
     Anthropic Consoleから取得したAPIキーに適用
     CCRプロキシの設定（Claude Code Router）
-    無料モデルとカスタムルーティングを使用、コスト削減、Claude Codeの可能性を探る
+    プロキシルーティングで複数のAIモデルを使用、コスト削減と可能性の拡張
     スキップ（後で手動設定）
 
 ? API URLを入力してください: https://api.anthropic.com
 ? Auth TokenまたはAPI Keyを入力してください: xxx
+
+✔ API設定完了
 
 ? インストールする出力スタイルを選択:
   ❯ エンジニアプロフェッショナル版 - プロフェッショナルソフトウェアエンジニア、SOLID、KISS、DRY、YAGNI原則を厳格に遵守
@@ -404,24 +488,46 @@ $ npx zcf
 ? グローバルデフォルト出力スタイルを選択:
   ❯ エンジニアプロフェッショナル版
 
+? インストールするワークフローを選択（スペースで選択、Enterで確定）:
+❯ ◉ 汎用ツール (init-project + init-architect + get-current-datetime) - 基本的なプロジェクト初期化と実用コマンド
+◉ 6ステップワークフロー (workflow) - 完全な6段階開発プロセス
+◉ 機能計画とUX設計 (feat + planner + ui-ux-designer) - 構造化された新機能開発
+◉ Git コマンド (commit + rollback + cleanBranches + worktree) - 簡略化されたGit操作
+◉ BMAD-Method 拡張インストーラー - エンタープライズアジャイル開発ワークフロー
+
+✔ ワークフローをインストール中...
+✔ インストール済みコマンド: zcf/workflow.md
+✔ インストール済みコマンド: zcf/feat.md
+✔ インストール済みエージェント: zcf/plan/planner.md
+✔ インストール済みエージェント: zcf/plan/ui-ux-designer.md
+✔ インストール済みコマンド: zcf/git/git-commit.md
+✔ インストール済みコマンド: zcf/git/git-rollback.md
+✔ インストール済みコマンド: zcf/git/git-cleanBranches.md
+✔ インストール済みコマンド: zcf/git/git-worktree.md
+✔ インストール済みコマンド: zcf/bmad-init.md
+✔ ワークフローのインストールが成功しました
+
 ? MCPサービスを設定しますか？(Y/n)
 
-? インストールするMCPサービスを選択:
-  ❯ context7 - 最新のライブラリとフレームワークのドキュメントを取得
-    mcp-deepwiki - deepwiki.comのナレッジベースにアクセス
-    Playwright - ブラウザ自動化とWebテスト
-    exa - 高度な検索とエンタープライズグレードの研究ツール
+? インストールするMCPサービスを選択（スペースで選択、Enterで確定）:
+❯ ◯ すべてインストール
+◯ Context7 ドキュメント検索 - 最新のライブラリドキュメントとコード例を検索
+◯ open-websearch - DuckDuckGo、Bing、Brave検索エンジンでウェブ検索
+◯ Spec ワークフロー - 要件から実装までの体系的な機能開発ワークフロー
+◯ DeepWiki - GitHubリポジトリドキュメントとサンプルを検索
+◯ Playwright ブラウザ制御 - ブラウザを直接制御して自動操作
+◯ Exa AI 検索 - Exa AIでウェブ検索
 
-? インストールするワークフローを選択:
-  ❯ 汎用ツールワークフロー - init-projectと関連エージェント
-    6ステップワークフロー - 完全な6段階開発プロセス
-    機能計画UX - 完全な機能開発ライフサイクル
-    Gitワークフロー - Git操作とブランチ管理
-    BMadワークフロー - AI駆動のアジャイル開発方法論
+? Exa API Keyを入力してください（https://dashboard.exa.ai/api-keys から取得）
+
+✔ MCPサービスが設定されました
 
 ? CCometixLineステータスバーツールをインストールしますか？(Y/n)
 
 ✔ 設定完了！Claude Code環境の準備ができました
+
+🎉 設定完了！'claude'コマンドで体験を開始してください。
+
 ```
 
 ## 🛠️ 開発
@@ -534,6 +640,8 @@ ZCFはAndroid Termux環境での実行をサポート：
 - Argolinhas（最初のko-fiスポンサー ٩(•̤̀ᵕ•̤́๑)）
 - r\*r（最初の匿名スポンサー🤣）
 - \*\*康（最初のKFCスポンサー🍗）
+- \*东（最初のコーヒースポンサー☕️）
+- 炼\*3（最初のTermuxユーザースポンサー📱）
 - 16°C咖啡（私の親友 🤪、Claude Code max $200プランを提供）
 
 ## 📄 ライセンス

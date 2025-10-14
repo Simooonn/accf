@@ -1,5 +1,347 @@
 # Changelog
 
+## 3.1.4
+
+### Patch Changes
+
+- ## New Features
+  - Add code type resolver with improved error handling and i18n support
+  - Add tool update scheduler for automated tool management
+  - Enhance Codex tool with skipPrompt support and language selection
+  - Add ZCF pull request creation command (/zcf-pr)
+  - Add comprehensive Git workflow prompt templates collection
+  - Support grouped Git workflows selection and expansion
+  - Add Termux user sponsor information to README files
+
+  ## 新功能
+  - 添加代码类型解析器，增强错误处理和国际化支持
+  - 新增工具更新调度器，实现自动化工具管理
+  - 增强 Codex 工具的 skipPrompt 支持和语言选择功能
+  - 新增 ZCF PR 创建命令 (/zcf-pr)
+  - 添加完整的 Git 工作流提示模板集合
+  - 支持分组 Git 工作流选择和扩展
+  - 在 README 文件中添加 Termux 用户赞助信息
+
+  ## Optimizations
+  - Improve init command configuration and user experience
+  - Enhance check-updates command functionality
+  - Optimize CLI setup and internationalization support
+  - Refine code tools integration and error handling
+
+  ## 优化
+  - 改进 init 命令的配置和用户体验
+  - 增强检查更新命令的功能
+  - 优化 CLI 设置和国际化支持
+  - 完善代码工具集成和错误处理
+
+  ## Testing Enhancements
+  - Significantly expand test coverage with new test files
+  - Add comprehensive integration and unit tests
+  - Include edge cases and error scenario testing
+  - Add tests for code type resolver and tool update scheduler
+
+  ## 测试增强
+  - 大幅增加测试覆盖率，新增多个测试文件
+  - 添加全面的集成测试和单元测试
+  - 包含边界条件和错误场景测试
+  - 为代码类型解析器和工具更新调度器添加测试
+
+  ## Documentation
+  - Update README files with Termux user sponsor
+  - Add Git workflow prompt templates documentation
+  - Enhance CLAUDE.md project documentation
+  - Add detailed command documentation for new features
+
+  ## 文档
+  - 更新 README 文件，添加 Termux 用户赞助信息
+  - 添加 Git 工作流提示模板文档
+  - 完善 CLAUDE.md 项目文档
+  - 为新功能添加详细的命令文档
+
+## 3.1.3
+
+### Patch Changes
+
+- ## Fixes
+  - Fix Codex Windows MCP configuration issues and improve configuration handling.
+
+  ## 修复
+  - 修复 Codex 在 Windows 上的 MCP 配置问题，并改进配置处理。
+
+  ## Testing
+  - Add unit tests for Codex MCP deduplication and Windows platform detection.
+
+  ## 测试
+  - 新增 Codex MCP 去重与 Windows 平台检测的单元测试。
+
+## 3.1.2
+
+### Patch Changes
+
+- ## New Features
+  - Add SYSTEMROOT environment variable support for Codex MCP services on Windows
+  - Implement platform-specific command handling for npx services in Codex
+  - Add getSystemRoot() function for Windows environment detection
+  - Add applyCodexPlatformCommand() function for consistent cross-platform execution
+
+  ## 新功能
+  - 为 Windows 平台上的 Codex MCP 服务添加 SYSTEMROOT 环境变量支持
+  - 为 Codex 中的 npx 服务实现平台特定命令处理
+  - 添加 getSystemRoot() 函数用于 Windows 环境检测
+  - 添加 applyCodexPlatformCommand() 函数确保跨平台执行一致性
+
+  ## Bug Fixes
+  - Fix Windows MCP service execution by using proper "cmd /c npx" instead of "npx.cmd"
+  - Ensure Codex MCP services have required Windows environment variables
+  - Resolve Windows command execution context issues for npx services
+
+  ## 修复
+  - 修复 Windows MCP 服务执行问题，使用正确的 "cmd /c npx" 替代 "npx.cmd"
+  - 确保 Codex MCP 服务拥有必需的 Windows 环境变量
+  - 解决 npx 服务在 Windows 上的命令执行上下文问题
+
+## 3.1.1
+
+### Patch Changes
+
+- ## Template Enhancement
+  - Update ojousama-engineer persona from blonde to blue-haired twintails design
+  - Adjust age from 17 to 18 years old for maturity consistency
+  - Update personality description and ending gesture in template
+
+  ## 模板增强
+  - 更新傲娇工程师角色设定：从金发改为蓝发双马尾设计
+  - 调整年龄从17岁至18岁以保持成熟度一致性
+  - 更新模板中的个性描述和结尾动作
+
+  ## Documentation Update
+  - Refresh project index with latest architecture analysis
+  - Update module documentation coverage metrics
+  - Enhance AI context initialization information
+
+  ## 文档更新
+  - 刷新项目索引以包含最新架构分析
+  - 更新模块文档覆盖指标
+  - 增强AI上下文初始化信息
+
+## 3.1.0
+
+### Minor Changes
+
+- ## New Features
+  - Add new "ojousama-engineer" AI personality style combining tsundere ojou-sama traits with professional engineering excellence
+  - Implement comprehensive bilingual support (zh-CN/en) for new personality including descriptions and UI elements
+  - Add personality-specific template files for both Claude Code and Codex systems with detailed behavioral guidelines
+  - Update output style configuration and selection logic to include new personality option
+  - Enhance internationalization files with complete translations for new personality style
+  - Add comprehensive test coverage for new output style functionality
+
+  ## 新功能
+  - 新增"ojousama-engineer"傲娇工程师AI个性风格，融合傲娇大小姐特质与专业工程卓越性
+  - 实现新个性的全面双语支持(zh-CN/en)，包括描述和UI元素
+  - 为Claude Code和Codex系统添加个性化模板文件，包含详细行为指南
+  - 更新输出风格配置和选择逻辑以包含新的个性选项
+  - 增强国际化文件，为新个性风格提供完整翻译
+  - 为新输出风格功能添加全面测试覆盖
+
+  ## Optimization
+  - Improve personality configuration system architecture
+  - Enhance template organization for AI personality styles
+  - Optimize bilingual translation workflow for personality descriptions
+
+  ## 优化
+  - 改进个性配置系统架构
+  - 优化AI个性风格的模板组织
+  - 优化个性描述的双语翻译工作流
+
+  ## Documentation
+  - Update README files across all languages to reflect new personality addition
+  - Configure spell checker to recognize new personality-related terms
+  - Add comprehensive documentation for new personality traits and behavior guidelines
+
+  ## 文档
+  - 更新所有语言的README文件以反映新个性添加
+  - 配置拼写检查器以识别新的个性相关术语
+  - 为新个性特质和行为指南添加全面文档
+
+## 3.0.3
+
+### Patch Changes
+
+- ## New Features
+  - Adapt to Claude Code 2.0 API changes with improved compatibility
+  - Add comprehensive API refactoring documentation and planning
+  - Enhance configuration management with better validation and error handling
+
+  ## 新功能
+  - 适配 Claude Code 2.0 API 变更，提升兼容性
+  - 添加全面的 API 重构文档和规划
+  - 增强配置管理功能，改进验证和错误处理
+
+  ## Optimization
+  - Remove deprecated opusplan model option from configuration
+  - Improve test coverage for initialization and configuration utilities
+  - Optimize configuration operations and validation logic
+
+  ## 优化
+  - 移除已弃用的 opusplan 模型选项
+  - 改进初始化和配置工具的测试覆盖率
+  - 优化配置操作和验证逻辑
+
+  ## Documentation
+  - Update multilingual documentation (README, Japanese, Chinese)
+  - Enhance i18n translations for API and configuration
+  - Add comprehensive API refactor summary documentation
+
+  ## 文档
+  - 更新多语言文档（README、日语、中文）
+  - 增强 API 和配置的国际化翻译
+  - 添加全面的 API 重构摘要文档
+
+## 3.0.2
+
+### Patch Changes
+
+- ## New Features
+  - Enhanced ZCF configuration migration with cross-device rename failure handling
+  - Improved Codex integration and configuration management
+  - Advanced error handling for cross-platform file operations
+
+  ## 新功能
+  - 增强ZCF配置迁移，支持跨设备重命名失败处理
+  - 改进Codex集成和配置管理功能
+  - 高级跨平台文件操作错误处理
+
+  ## Optimization
+  - Enhanced Codex configuration switching mechanism
+  - Improved CLI initialization and menu system robustness
+  - Strengthened cross-platform compatibility for configuration operations
+
+  ## 优化
+  - 增强Codex配置切换机制
+  - 改进CLI初始化和菜单系统稳定性
+  - 加强配置操作的跨平台兼容性
+
+  ## Documentation
+  - Add first coffee sponsor recognition to README files
+  - Update project documentation with sponsor information
+
+  ## 文档
+  - 添加首位咖啡赞助者信息到README文件
+  - 更新项目文档和赞助者信息
+
+  ## Testing
+  - Significantly expanded test coverage for initialization commands
+  - Enhanced Codex integration test scenarios
+  - Improved configuration migration testing
+  - Added comprehensive edge case testing
+
+  ## 测试
+  - 大幅扩展初始化命令测试覆盖率
+  - 增强Codex集成测试场景
+  - 改进配置迁移测试
+  - 添加全面的边界情况测试
+
+## 3.0.1
+
+### Patch Changes
+
+- ## Improvements
+  - Enhanced Codex API key handling with improved existing authentication reading logic
+  - Added workflow command parameter limitation documentation across all language versions
+
+  ## Optimization
+  - Improved Codex provider configuration with better default API key handling
+  - Enhanced authentication file reading for existing configurations
+
+  ## Documentation
+  - Added important workflow command usage notes to README files
+  - Updated multilingual documentation with Codex prompt limitations guidance
+
+  ## 改进
+  - 增强 Codex API 密钥处理，改进现有认证读取逻辑
+  - 在所有语言版本中添加工作流命令参数限制文档说明
+
+  ## 优化
+  - 改进 Codex 提供商配置，提供更好的默认 API 密钥处理
+  - 增强现有配置的认证文件读取功能
+
+  ## 文档
+  - 在 README 文件中添加重要的工作流命令使用说明
+  - 更新多语言文档，提供 Codex 提示限制指导
+
+## 3.0.0
+
+### Major Changes
+
+- ## Major Features
+  - Add comprehensive Codex integration and configuration management system
+  - Implement AI agent team configuration with specialized domain expertise
+  - Add enhanced configuration switching command with intelligent detection
+  - Introduce dual template system supporting both Claude Code and Codex workflows
+  - Add complete backup mechanism with incremental configuration management
+
+  ## 主要功能
+  - 添加完整的 Codex 集成和配置管理系统
+  - 实现 AI 代理团队配置，提供专业领域专长
+  - 添加增强的配置切换命令，支持智能检测
+  - 引入双模板系统，支持 Claude Code 和 Codex 工作流
+  - 添加完整的备份机制和增量配置管理
+
+  ## Architecture & Development
+  - Refactor template system with modular structure for better maintainability
+  - Add comprehensive TOML configuration parser and validator
+  - Implement advanced provider management system for different AI tools
+  - Add intelligent configuration detection and switching capabilities
+  - Introduce Serena project integration for enhanced development workflow
+
+  ## 架构与开发
+  - 重构模板系统，采用模块化结构提升可维护性
+  - 添加全面的 TOML 配置解析器和验证器
+  - 实现高级提供商管理系统，支持不同 AI 工具
+  - 添加智能配置检测和切换功能
+  - 引入 Serena 项目集成，增强开发工作流
+
+  ## Testing & Quality
+  - Add 50+ comprehensive test files with TDD approach
+  - Enhance test coverage for backup and configuration handling
+  - Add validation tests for codex provider data and configurations
+  - Implement edge case testing for uninstaller and configuration management
+  - Add comprehensive integration testing for npm package functionality
+
+  ## 测试与质量
+  - 新增 50+ 全面测试文件，采用 TDD 方法
+  - 增强备份和配置处理的测试覆盖
+  - 添加 Codex 提供商数据和配置的验证测试
+  - 实现卸载器和配置管理的边界案例测试
+  - 添加 npm 包功能的全面集成测试
+
+  ## Documentation & Internationalization
+  - Add Codex support documentation with multilingual README sections
+  - Implement AI agent team documentation with role specifications
+  - Add comprehensive Codex workflow and system prompt templates
+  - Update project documentation with latest architecture and features
+  - Enhance internationalization support with new translation namespaces
+
+  ## 文档与国际化
+  - 添加 Codex 支持文档和多语言 README 部分
+  - 实现 AI 代理团队文档和角色规范
+  - 添加全面的 Codex 工作流和系统提示模板
+  - 更新项目文档，包含最新架构和功能
+  - 增强国际化支持，新增翻译命名空间
+
+  ## Breaking Changes
+  - Template structure moved from root to `claude-code/` and `codex/` subdirectories
+  - Configuration format enhanced with TOML support alongside JSON
+  - Command structure updated with new config-switch functionality
+  - AI workflow templates reorganized with provider-specific configurations
+
+  ## 破坏性变更
+  - 模板结构从根目录移动到 `claude-code/` 和 `codex/` 子目录
+  - 配置格式增强，支持 TOML 和 JSON 格式
+  - 命令结构更新，新增配置切换功能
+  - AI 工作流模板重组，提供特定于提供商的配置
+
 ## 2.12.13
 
 ### Patch Changes

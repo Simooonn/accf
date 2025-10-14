@@ -1,4 +1,4 @@
-# ZCF - Zero-Config Claude-Code Flow
+# ZCF - Zero-Config Code Flow
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
@@ -10,7 +10,9 @@
 
 [中文](README_zh-CN.md) | **English** | [日本語](README_ja-JP.md) | [Changelog](CHANGELOG.md)
 
-> Zero-config, one-click setup for Claude Code with bilingual support, intelligent agent system and personalized AI assistant
+**✨ Quick Links**: [Codex Support](#-codex-support-v300-new) | [BMad Workflow](#-bmad-workflow-v27-new-feature) | [Spec Workflow](#-spec-workflow-v2124-new-feature) | [Open Web Search](#-open-web-search-v2129-new-feature) | [CCR Router](#-ccr-claude-code-router-support-v28-enhanced) | [CCometixLine](#-ccometixline-support-status-bar-tool-v299-new) | [Output Styles](#-ai-output-styles-v212-new-feature)
+
+> Zero-config, one-click setup for Claude Code & Codex with bilingual support, intelligent agent system and personalized AI assistant
 
 ![Rendering](./src/assets/screenshot-en.webp)
 
@@ -28,7 +30,7 @@ Menu options include:
 - `2` Import workflows (equivalent to `zcf u`)
 - `3` Configure API or CCR - API configuration or CCR proxy setup
 - `4` Configure MCP - MCP service configuration and management
-- `5` Configure default model - Set default model (opus/sonnet/opusplan/custom)
+- `5` Configure default model - Set default model (opus/sonnet/sonnet 1m/custom)
 - `6` Configure AI memory - Configure AI output language and global output style
 - `7` Configure environment permissions - Import environment variables and permissions
 - `R` Claude Code Router management (enhanced in v2.8.1)
@@ -41,8 +43,8 @@ Menu options include:
 
 **Model Configuration (Option 5)**: Configure your default Claude model with flexible options:
 - **Default**: Let Claude Code automatically choose the best model for each task
-- **Opus**: Use Claude-3.5-Opus exclusively (high token consumption, use with caution)
-- **OpusPlan**: Use Opus for planning, Sonnet for implementation (recommended balance)
+- **Opus**: Use Claude-4.1-Opus exclusively (high token consumption, use with caution)
+- **Sonnet 1M**: Use Sonnet with 1M context window for larger context tasks
 - **Custom**: Specify your own model names for both primary and fast tasks (supports any custom model)
 
 **AI Memory Configuration (Option 6)**: Personalize your AI assistant:
@@ -122,9 +124,86 @@ When using `--skip-prompt`, the following parameters are available:
 | `--api-url, -u`              | Custom API URL                                           | URL string                                                                                         | No                                     | official API                                                                                                                     |
 | `--mcp-services, -m`         | MCP services to install (multi-select, comma-separated)  | `context7`, `open-websearch`, `spec-workflow`, `mcp-deepwiki`, `Playwright`, `exa`, or `skip` for none | No                                     | `all`                                                                                                                            |
 | `--workflows, -w`            | Workflows to install (multi-select, comma-separated)     | `commonTools`, `sixStepsWorkflow`, `featPlanUx`, `gitWorkflow`, `bmadWorkflow`, or `skip` for none | No                                     | `all`                                                                                                                            |
-| `--output-styles, -o`        | Output styles to install (multi-select, comma-separated) | `engineer-professional`, `nekomata-engineer`, `laowang-engineer`, or `skip` for none               | No                                     | `all`                                                                                                                            |
+| `--output-styles, -o`        | Output styles to install (multi-select, comma-separated) | `engineer-professional`, `nekomata-engineer`, `laowang-engineer`, `ojousama-engineer`, or `skip` for none               | No                                     | `all`                                                                                                                            |
 | `--default-output-style, -d` | Default output style                                     | Same as output styles plus built-in: `default`, `explanatory`, `learning`                          | No                                     | `engineer-professional`                                                                                                          |
 | `--install-cometix-line, -x` | Install CCometixLine statusline tool                     | `true`, `false`                                                                                    | No                                     | `true`                                                                                                                           |
+
+#### 🤖 Codex Support (v3.0.0+ New)
+
+[Codex](https://www.npmjs.com/package/@openai/codex) is OpenAI's official code generation CLI tool. ZCF now supports complete Codex integration with the same configuration convenience as Claude Code.
+
+**Key Features:**
+
+- **Unified Tool Management**: Switch between Claude Code and Codex seamlessly through ZCF menu
+- **Intelligent Configuration**: Automatic Codex CLI installation, API provider setup, and MCP service integration
+- **Comprehensive Backup System**: All configuration changes include timestamped backups with recovery capabilities
+- **Multi-Provider Support**: Configure multiple API providers (OpenAI, custom endpoints) with easy switching
+- **System Prompt Integration**: Install professional AI personalities (Engineer, Nekomata Engineer, Laowang Engineer)
+- **Workflow Templates**: Import structured development workflows optimized for code generation tasks
+- **Advanced Uninstaller**: Selective removal of Codex components with conflict resolution
+
+**Getting Started with Codex:**
+
+Switch to Codex mode in ZCF main menu:
+```bash
+npx zcf → Select S  # Switch between Claude Code and Codex
+```
+
+Or access Codex features directly:
+```bash
+# Full Codex initialization
+npx zcf → Select 1 (after switching to Codex mode)
+
+# Individual Codex configuration
+npx zcf → Select 3  # Configure Codex API providers
+npx zcf → Select 4  # Configure Codex MCP services
+```
+
+**Configuration Options:**
+
+1. **API Provider Configuration**:
+   - **Official Login**: Use OpenAI's official authentication system
+   - **Custom Providers**: Configure multiple API endpoints with provider switching
+   - **Incremental Management**: Add, edit, or remove providers without affecting existing configuration
+
+2. **System Prompt Styles**:
+   - **Engineer Professional**: SOLID, KISS, DRY, YAGNI principles for robust code
+   - **Nekomata Engineer**: Cute catgirl engineer with rigorous technical standards
+   - **Laowang Engineer**: Grumpy tech style that never tolerates substandard code
+
+3. **Workflow Integration**:
+   - **Six-Step Workflow**: Structured development process from research to optimization
+   - **Custom Workflows**: Import and configure task-specific development templates
+   - **⚠️ Important**: Due to Codex prompt limitations, `/workflow` commands cannot pass parameters directly. Use `/workflow` first, then provide task description in follow-up message
+
+4. **MCP Services**: Full compatibility with existing MCP services including:
+   - Context7, Open WebSearch, Spec Workflow
+   - DeepWiki, Playwright, EXA search
+   - Automatic service configuration with API key management
+
+**File Locations:**
+
+- Configuration: `~/.codex/config.toml`
+- Authentication: `~/.codex/auth.json`
+- System Prompts: `~/.codex/AGENTS.md`
+- Workflows: `~/.codex/prompts/`
+- Backups: `~/.codex/backup/`
+
+**Command Line Operations:**
+
+Dedicated command line tool for Codex (v3.0.0+ New):
+
+```bash
+# Codex API provider switching
+npx zcf config-switch     # Interactive provider selection
+npx zcf cs                # Using alias
+npx zcf cs provider-name  # Direct switch to specified provider
+npx zcf cs --list         # List all available providers
+```
+
+**Migration Between Tools:**
+
+ZCF allows seamless switching between Claude Code and Codex while preserving your preferences and workflow configurations. Both tools share the same MCP services and workflow templates for consistent development experience.
 
 #### 🎨 AI Output Styles (v2.12+ New Feature)
 
@@ -135,6 +214,7 @@ ZCF now supports customizable AI output styles to personalize your Claude Code e
 - `engineer-professional`: Professional software engineer following SOLID, KISS, DRY, YAGNI principles
 - `nekomata-engineer`: Professional catgirl engineer UFO Nya, combining rigorous engineering with cute catgirl traits
 - `laowang-engineer`: Laowang grumpy tech style, never tolerates code errors and non-standard code
+- `ojousama-engineer`: Tsundere blonde ojou-sama programmer Halley-chan, combining rigorous engineering excellence with tsundere ojou-sama traits
 - Built-in styles: `default`, `explanatory`, `learning` (always available)
 
 **Features:**
@@ -224,6 +304,7 @@ After CCR setup, ZCF automatically configures Claude Code to use CCR as the API 
 
 **Important Notice for v2.9.9 Users**: If you previously installed CCometixLine using ZCF v2.9.9, please rerun the installation process to ensure that the CCometixLine configuration is correctly added. Run `npx zcf` -> `Select L` -> `Select 1` to add the CCometixLine configuration.
 
+
 #### 📊 CCometixLine Support (Status Bar Tool) (v2.9.9+ New)
 
 [CCometixLine](https://github.com/Haleclipse/CCometixLine) is a high-performance Rust-based statusline tool that provides:
@@ -282,7 +363,7 @@ After configuration:
 - Script interaction language: Controls installation prompts language
 - Configuration file language: Determines which configuration set to install (zh-CN/en)
 - AI output language: Choose the language for AI responses (supports Chinese, English, and custom languages)
-- AI output styles: Support multiple preset styles (Professional Engineer, Nekomata Engineer, Laowang Engineer) for customized experience
+- AI output styles: Support multiple preset styles (Professional Engineer, Nekomata Engineer, Laowang Engineer, Ojou-sama Engineer) for customized experience
 
 ### 🔧 Smart Installation
 
@@ -327,7 +408,7 @@ After configuration:
 ```bash
 $ npx zcf
 
- ZCF - Zero-Config Claude-Code Flow
+ ZCF - Zero-Config Code Flow
 
 ? Select ZCF display language / 选择ZCF显示语言:
   ❯ 简体中文
@@ -339,7 +420,7 @@ Select function:
   2. Import workflow - Import/update workflow-related files only
   3. Configure API - Configure API URL and authentication (supports CCR proxy)
   4. Configure MCP - Configure MCP services (includes Windows fix)
-  5. Configure default model - Set default model (opus/sonnet/opusplan/custom)
+  5. Configure default model - Set default model (opus/sonnet/sonnet 1m/custom)
   6. Configure Claude global memory - Configure AI output language and output styles
   7. Import recommended environment variables and permissions - Import privacy protection environment variables and system permissions
 
@@ -361,15 +442,17 @@ Enter your choice: _
 
 ```bash
 ? Select Claude Code configuration language:
-  ❯ 简体中文 (zh-CN) - Chinese (easier for Chinese users to customize)
-    English (en) - English (recommended, lower token consumption)
+  ❯ English (en) - English (recommended, lower token consumption)
+    简体中文 (zh-CN) - Chinese (easier for Chinese users to customize)
+    日本語 (ja) - Japanese (日本のユーザー向け)
 
 ? Select AI output language:
   AI will respond to you in this language
-  ❯ 简体中文
-    English
+  ❯ English
+    简体中文
+    日本語
     Custom
-    (Supports Japanese, French, German, and more)
+    (Supports French, German, and more)
 
 ? Claude Code not found. Install automatically? (Y/n)
 
@@ -382,12 +465,14 @@ Enter your choice: _
     Skip - Skip configuration update
 
 ? Select API authentication method
-  ❯ Use Auth Token (OAuth authentication)
+  ❯ Use Official Login
+    Use official authentication system without API configuration
+    Use Auth Token (OAuth authentication)
     For tokens obtained via OAuth or browser login
     Use API Key (Key authentication)
     For API keys from Anthropic Console
     Configure CCR Proxy (Claude Code Router)
-    Use free models and custom routing to reduce costs and explore the possibilities of Claude Code
+    Use multiple AI models via proxy routing to reduce costs and explore possibilities
     Skip (configure manually later)
 
 ? Enter API URL: https://api.anthropic.com
@@ -397,34 +482,12 @@ Enter your choice: _
   ❯ Engineer Professional - Professional software engineer following SOLID, KISS, DRY, YAGNI principles
     Nekomata Engineer - Professional catgirl engineer UFO Nya, combining rigorous engineering with cute catgirl traits
     Laowang Grumpy Tech - Laowang grumpy tech style, never tolerates code errors and non-standard code
+    Ojou-sama Engineer - Tsundere blonde ojou-sama programmer Halley-chan, combining rigorous engineering excellence with tsundere ojou-sama traits
 
 ? Select global default output style:
   ❯ Engineer Professional
 
-? Configure MCP services? (Y/n)
-
-? Select MCP services to install:
-  ❯ context7 - Get latest library and framework documentation
-    mcp-deepwiki - Access deepwiki.com knowledge base
-    Playwright - Browser automation and web testing
-    exa - Advanced search and enterprise research tools
-
-? Select workflows to install:
-  ❯ Common Tools Workflow - init-project and related agents
-    Six Steps Workflow - Complete six-stage development process
-    Feature Planning UX - Complete feature development lifecycle
-    Git Workflow - Git operations and branch management
-    BMad Workflow - AI-driven agile development methodology
-
-? Install CCometixLine statusline tool? (Y/n)
-
-✔ Setup complete! Claude Code environment is ready
-```
-
-✔ All config files backed up to ~/.claude/backup/xxx
-✔ Config files copied to ~/.claude
-
-? Select workflows to install (space to select, enter to confirm)
+? Select workflows to install (space to select, enter to confirm):
 ❯ ◉ Common Tools (init-project + init-architect + get-current-datetime) - Essential project initialization and utility commands
 ◉ Six Steps Workflow (workflow) - Complete 6-phase development process
 ◉ Feature Planning and UX Design (feat + planner + ui-ux-designer) - Structured feature development
@@ -443,24 +506,24 @@ Enter your choice: _
 ✔ Installed command: zcf/bmad-init.md
 ✔ Workflow installation successful
 
-✔ API configured
-
 ? Configure MCP services? (Y/n)
 
-? Select MCP services to install (space to select, enter to confirm)
-❯ ◯ Install all
-◯ Context7 Documentation Query - Query latest library docs and code examples
-◯ DeepWiki - Query GitHub repository docs and examples
-◯ Playwright Browser Control - Direct browser automation control
-◯ Exa AI Search - Web search using Exa AI
-
-? Enter Exa API Key (get from https://dashboard.exa.ai/api-keys)
+? Select MCP services to install (space to select, enter to confirm):
+❯ ◉ Context7 Documentation Query - Query latest library docs and code examples
+◉ DeepWiki - Query GitHub repository docs and examples
+◉ Playwright Browser Control - Direct browser automation control
+◉ Exa AI Search - Web search using Exa AI
+◯ Install all services
 
 ✔ MCP services configured
 
+? Install CCometixLine statusline tool? (Y/n)
+
+✔ Setup complete! Claude Code environment is ready
+
 🎉 Setup complete! Use 'claude' command to start.
 
-````
+```
 
 ### Command Line Options
 
@@ -473,6 +536,7 @@ Enter your choice: _
 | `zcf update`        | `zcf u` | Update workflow-related md files with backup                                          |
 | `zcf ccu`           | -       | Run Claude Code usage analysis tool - [ccusage](https://github.com/ryoppippi/ccusage) |
 | `zcf ccr`           | -       | Open CCR (Claude Code Router) management menu                                         |
+| `zcf config-switch` | `zcf cs` | Codex API provider switching tool - Switch between official login and custom providers |
 | `zcf uninstall`     | -       | Interactive uninstall tool for Claude Code configurations and tools                   |
 | `zcf check-updates` | -       | Check and update Claude Code, CCR and CCometixLine versions                           |
 
@@ -498,7 +562,7 @@ npx zcf -h
 # Show version
 npx zcf --version
 npx zcf -v
-````
+```
 
 #### Usage Examples
 
@@ -524,6 +588,12 @@ npx zcf u -c en            # Using short option
 
 # Run Claude Code usage analysis tool (powered by ccusage)
 npx zcf ccu               # Daily usage (default), or use: monthly, session, blocks
+
+# Codex API provider switching (v3.0.0+ New)
+npx zcf config-switch     # Interactive provider selection
+npx zcf cs                # Using alias
+npx zcf cs provider-name  # Direct switch to specified provider
+npx zcf cs --list         # List all available providers
 ```
 
 ## 📁 Project Structure
@@ -713,6 +783,8 @@ A huge thank you to all our sponsors for their generous support!
 - Argolinhas (first ko-fi sponsor ٩(•̤̀ᵕ•̤́๑))
 - r\*r (first anonymous sponsor🤣)
 - \*\*康 (first KFC sponsor🍗)
+- \*东 (first coffee sponsor☕️)
+- 炼\*3 (first Termux user sponsor📱)
 - 16°C coffee (My best friend🤪, offered Claude Code max $200 package)
 
 ## 📄 License

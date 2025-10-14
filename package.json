@@ -1,7 +1,7 @@
 {
   "name": "accf",
   "type": "module",
-  "version": "3.0.7",
+  "version": "4.0.0",
   "packageManager": "pnpm@10.16.1",
   "description": "Claude-Code Flow - One-click configuration tool for Claude Code",
   "author": {
@@ -75,6 +75,7 @@
     "ora": "catalog:cli",
     "pathe": "catalog:runtime",
     "semver": "catalog:runtime",
+    "smol-toml": "catalog:runtime",
     "tinyexec": "catalog:runtime",
     "trash": "catalog:runtime"
   },

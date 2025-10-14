@@ -1,4 +1,4 @@
-# ZCF - Zero-Config Claude-Code Flow
+# ZCF - Zero-Config Code Flow
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
@@ -10,7 +10,9 @@
 
 **中文** | [English](README.md) | [日本語](README_ja-JP.md) | [更新日志](CHANGELOG.md)
 
-> 零配置，一键搞定 Claude Code 环境设置 - 支持中英文双语配置、智能代理系统和个性化 AI 助手
+**✨ 快速导航**: [Codex 支持](#-codex-支持v300-新增) | [BMad 工作流](#-bmad-工作流v27-新功能) | [Spec 工作流](#-spec-工作流v2124-新功能) | [开放网页搜索](#-开放网页搜索v2129-新功能) | [CCR 代理](#-ccr-claude-code-router-支持v28-增强版) | [CCometixLine](#-ccometixline-支持状态栏工具v299-新增) | [输出风格](#-ai-输出风格v212-新功能)
+
+> 零配置，一键搞定 Claude Code & Codex 环境设置 - 支持中英文双语配置、智能代理系统和个性化 AI 助手
 
 ![效果图](./src/assets/screenshot.webp)
 
@@ -28,7 +30,7 @@ npx zcf          # 打开交互式菜单，根据你的需求选择操作
 - `2` 导入工作流（等同于 `zcf u`）
 - `3` 配置 API 或 CCR - API 配置或 CCR 代理设置
 - `4` 配置 MCP - MCP 服务配置和管理
-- `5` 配置默认模型 - 设置默认模型（opus/sonnet/opusplan/自定义）
+- `5` 配置默认模型 - 设置默认模型（opus/sonnet/sonnet 1m/自定义）
 - `6` 配置 AI 记忆 - 配置 AI 输出语言和全局输出风格
 - `7` 配置环境权限 - 导入环境变量和权限设置
 - `R` Claude Code Router 管理（v2.8.1 增强）
@@ -41,8 +43,8 @@ npx zcf          # 打开交互式菜单，根据你的需求选择操作
 
 **模型配置（选项 5）**：灵活配置您的默认 Claude 模型：
 - **默认**：让 Claude Code 为每个任务自动选择最佳模型
-- **Opus**：专门使用 Claude-3.5-Opus（高 token 消耗，请谨慎使用）
-- **OpusPlan**：规划时使用 Opus，实现时使用 Sonnet（推荐平衡选择）
+- **Opus**：专门使用 Claude-4.1-Opus（高 token 消耗，请谨慎使用）
+- **Sonnet 1M**：使用具有 1M 上下文窗口的 Sonnet 模型处理大上下文任务
 - **自定义**：为主要任务和快速任务指定您自己的模型名称（支持任何自定义模型）
 
 **AI 记忆配置（选项 6）**：个性化您的 AI 助手：
@@ -122,9 +124,85 @@ npx zcf i --skip-prompt --all-lang zh-CN --api-type api_key --api-key "sk-xxx" -
 | `--api-url, -u`              | 自定义 API URL                          | URL 字符串                                                                                             | 否                            | 官方 API                                                                               |
 | `--mcp-services, -m`         | 要安装的 MCP 服务（多选，逗号分隔）     | `context7`, `open-websearch`, `spec-workflow`, `mcp-deepwiki`, `Playwright`, `exa`, 或 `skip` 表示跳过全部 | 否                            | `all`                                                                                  |
 | `--workflows, -w`            | 要安装的工作流（多选，逗号分隔）        | `commonTools`, `sixStepsWorkflow`, `featPlanUx`, `gitWorkflow`, `bmadWorkflow`, 或 `skip` 表示跳过全部 | 否                            | `all`                                                                                  |
-| `--output-styles, -o`        | 要安装的输出风格（多选，逗号分隔）      | `engineer-professional`, `nekomata-engineer`, `laowang-engineer`，或 `skip` 表示不安装                 | 否                            | `all`                                                                                  |
+| `--output-styles, -o`        | 要安装的输出风格（多选，逗号分隔）      | `engineer-professional`, `nekomata-engineer`, `laowang-engineer`, `ojousama-engineer`，或 `skip` 表示不安装                 | 否                            | `all`                                                                                  |
 | `--default-output-style, -d` | 默认输出风格                            | 同输出风格选项，还包括内置风格：`default`, `explanatory`, `learning`                                   | 否                            | `engineer-professional`                                                                |
 | `--install-cometix-line, -x` | 安装 CCometixLine 状态栏工具            | `true`, `false`                                                                                        | 否                            | `true`                                                                                 |
+
+#### 🤖 Codex 支持（v3.0.0+ 新增）
+
+[Codex](https://www.npmjs.com/package/@openai/codex) 是 OpenAI 官方的代码生成 CLI 工具。ZCF 现在支持完整的 Codex 集成，具备与 Claude Code 相同的配置便利性。
+
+**核心特性：**
+
+- **统一工具管理**：通过 ZCF 菜单在 Claude Code 和 Codex 之间无缝切换
+- **智能配置系统**：自动 Codex CLI 安装、API 提供商设置和 MCP 服务集成
+- **完善备份机制**：所有配置更改都包含时间戳备份，支持恢复功能
+- **多提供商支持**：配置多个 API 提供商（OpenAI、自定义端点），支持轻松切换
+- **系统提示集成**：安装专业 AI 个性（工程师、猫娘工程师、老王工程师）
+- **工作流模板**：导入为代码生成任务优化的结构化开发工作流
+- **高级卸载器**：选择性移除 Codex 组件，支持冲突解决
+
+**Codex 快速入门：**
+
+在 ZCF 主菜单中切换到 Codex 模式：
+```bash
+npx zcf → 选择 S  # 在 Claude Code 和 Codex 之间切换
+```
+
+或直接访问 Codex 功能：
+```bash
+# 完整 Codex 初始化
+npx zcf → 选择 1（切换到 Codex 模式后）
+
+# 单独 Codex 配置
+npx zcf → 选择 3  # 配置 Codex API 提供商
+npx zcf → 选择 4  # 配置 Codex MCP 服务
+```
+
+**配置选项：**
+
+1. **API 提供商配置**：
+   - **官方登录**：使用 OpenAI 官方认证系统
+   - **自定义提供商**：配置多个 API 端点，支持提供商切换
+   - **增量管理**：添加、编辑或删除提供商，不影响现有配置
+
+2. **系统提示风格**：
+   - **专业工程师**：遵循 SOLID、KISS、DRY、YAGNI 原则的健壮代码
+   - **猫娘工程师**：可爱猫娘工程师，具备严格的技术标准
+   - **老王工程师**：暴脾气技术流，绝不容忍低质量代码
+
+3. **工作流集成**：
+   - **六步工作流**：从研究到优化的结构化开发流程
+   - **自定义工作流**：导入和配置任务特定的开发模板
+
+4. **MCP 服务**：与现有 MCP 服务完全兼容，包括：
+   - Context7、开放网页搜索、Spec 工作流
+   - DeepWiki、Playwright、EXA 搜索
+   - 自动服务配置与 API 密钥管理
+
+**文件位置：**
+
+- 配置文件：`~/.codex/config.toml`
+- 认证文件：`~/.codex/auth.json`
+- 系统提示：`~/.codex/AGENTS.md`
+- 工作流：`~/.codex/prompts/`
+- 备份：`~/.codex/backup/`
+
+**命令行操作：**
+
+Codex 专用命令行工具（v3.0.0+ 新增）：
+
+```bash
+# Codex API 提供商切换
+npx zcf config-switch     # 交互式提供商选择
+npx zcf cs                # 使用别名
+npx zcf cs provider-name  # 直接切换到指定提供商
+npx zcf cs --list         # 列出所有可用提供商
+```
+
+**工具间迁移：**
+
+ZCF 允许在 Claude Code 和 Codex 之间无缝切换，同时保留您的偏好设置和工作流配置。两个工具共享相同的 MCP 服务和工作流模板，确保一致的开发体验。
 
 #### 🎨 AI 输出风格（v2.12+ 新功能）
 
@@ -135,6 +213,7 @@ ZCF 现在支持可定制的 AI 输出风格，个性化你的 Claude Code 体�
 - `engineer-professional`：专业软件工程师，遵循 SOLID、KISS、DRY、YAGNI 原则
 - `nekomata-engineer`：专业猫娘工程师 幽浮喵，结合严谨工程技术与可爱猫娘特质
 - `laowang-engineer`：老王暴脾气技术流，绝不容忍代码错误和不规范代码
+- `ojousama-engineer`：傲娇金发大小姐程序员哈雷酱，融合严谨工程师素养与傲娇大小姐特质
 - 内置样式：`default`、`explanatory`、`learning`（始终可用）
 
 **功能特性：**
@@ -223,6 +302,7 @@ CCR 菜单选项：
 CCR 设置完成后，ZCF 会自动配置 Claude Code 使用 CCR 作为 API 代理。
 
 > **v2.9.1 版本用户重要提示**：如果您之前使用过 ZCF v2.9.1 版本初始化 CCR，请重新执行 CCR 初始化流程，以确保安装正确的 `@musistudio/claude-code-router` 包。v2.9.1 版本中存在包名错误问题，该问题已在后续版本中修复。
+
 
 #### 📊 CCometixLine 支持（状态栏工具）（v2.9.9+ 新增）
 
@@ -327,7 +407,7 @@ npx zcf → 选择 +
 ```bash
 $ npx zcf
 
- ZCF - Zero-Config Claude-Code Flow
+ ZCF - Zero-Config Code Flow
 
 ? Select ZCF display language / 选择ZCF显示语言:
   ❯ 简体中文
@@ -339,7 +419,7 @@ $ npx zcf
   2. 导入工作流 - 仅导入/更新工作流相关文件
   3. 配置 API - 配置 API URL 和认证信息（支持 CCR 代理）
   4. 配置 MCP - 配置 MCP 服务（含 Windows 修复）
-  5. 配置默认模型 - 设置默认模型（opus/sonnet/opusplan/自定义）
+  5. 配置默认模型 - 设置默认模型（opus/sonnet/sonnet 1m/自定义）
   6. 配置 Claude 全局记忆 - 配置 AI 输出语言和输出风格
   7. 导入推荐环境变量和权限配置 - 导入隐私保护环境变量和系统权限配置
 
@@ -360,16 +440,18 @@ $ npx zcf
 ### 完整初始化流程（选择 1 或使用 `zcf i`）
 
 ```bash
-? 选择 Claude Code 配置语言:
-  ❯ 简体中文 (zh-CN) - 中文版（便于中文用户自定义）
-    English (en) - 英文版（token 消耗更低）
+? 选择配置语言:
+  ❯ English (en) - 英文版（token 消耗更低）
+    简体中文 (zh-CN) - 中文版（便于中文用户自定义）
+    日本語 (ja) - 日本語版（日本語ユーザー向けカスタマイズ）
 
 ? 选择 AI 输出语言:
   AI 将使用此语言回复你的问题
   ❯ 简体中文
     English
+    日本語
     Custom
-    （支持日语、法语、德语等多种语言）
+    （支持法语、德语等多种语言）
 
 ? 检测到 Claude Code 未安装，是否自动安装？(Y/n)
 
@@ -382,47 +464,29 @@ $ npx zcf
     跳过 - 跳过配置更新
 
 ? 选择 API 认证方式
-  ❯ 使用 Auth Token (OAuth 认证)
+  ❯ 使用官方登录
+    使用官方认证系统，无需配置 API
+    使用 Auth Token (OAuth 认证)
     适用于通过 OAuth 或浏览器登录获取的令牌
     使用 API Key (密钥认证)
     适用于从 Anthropic Console 获取的 API 密钥
     配置 CCR 代理（Claude Code Router）
-    使用免费模型和自定义路由，降低成本，探索Claude Code 的可能性
+    通过代理路由使用多种 AI 模型，降低成本并探索更多可能性
     跳过（稍后手动配置）
 
 ? 请输入 API URL: https://api.anthropic.com
 ? 请输入 Auth Token 或 API Key: xxx
 
+✔ API 配置完成
+
 ? 选择要安装的输出风格:
   ❯ 工程师专业版 - 专业的软件工程师，严格遵循SOLID、KISS、DRY、YAGNI原则
     猫娘工程师 - 专业的猫娘工程师幽浮喵，结合严谨工程师素养与可爱猫娘特质
     老王暴躁技术流 - 老王暴躁技术流，绝不容忍代码报错和不规范的代码
+    大小姐工程师 - 傲娇金发大小姐程序员哈雷酱，融合严谨工程师素养与傲娇大小姐特质
 
 ? 选择全局默认输出风格:
   ❯ 工程师专业版
-
-? 是否配置 MCP 服务？(Y/n)
-
-? 选择要安装的 MCP 服务:
-  ❯ context7 - 获取最新的库和框架文档
-    mcp-deepwiki - 访问 deepwiki.com 的知识库
-    Playwright - 浏览器自动化和网页测试
-    exa - 高级搜索和企业级研究工具
-
-? 选择要安装的工作流:
-  ❯ 通用工具工作流 - init-project 和相关代理
-    六步工作流 - 完整的六阶段开发流程
-    功能规划UX - 完整的功能开发生命周期
-    Git工作流 - Git操作和分支管理
-    BMad工作流 - AI驱动的敏捷开发方法论
-
-? 是否安装 CCometixLine 状态栏工具？(Y/n)
-
-✔ 配置完成！Claude Code 环境已就绪
-```
-
-✔ 已备份所有配置文件到 ~/.claude/backup/xxx
-✔ 配置文件已复制到 ~/.claude
 
 ? 选择要安装的工作流（空格选择，回车确认）
 ❯ ◉ 通用工具 (init-project + init-architect + get-current-datetime) - 基础项目初始化和实用命令
@@ -443,8 +507,6 @@ $ npx zcf
 ✔ 已安装命令: zcf/bmad-init.md
 ✔ 工作流安装成功
 
-✔ API 配置完成
-
 ? 是否配置 MCP 服务？(Y/n)
 
 ? 选择要安装的 MCP 服务（空格选择，回车确认）
@@ -460,9 +522,13 @@ $ npx zcf
 
 ✔ MCP 服务已配置
 
+? 是否安装 CCometixLine 状态栏工具？(Y/n)
+
+✔ 配置完成！Claude Code 环境已就绪
+
 🎉 配置完成！使用 'claude' 命令开始体验。
 
-````
+```
 
 ### 命令行参数
 
@@ -475,6 +541,7 @@ $ npx zcf
 | `zcf update`        | `zcf u` | 更新 Prompt 文档并备份旧配置                                                    |
 | `zcf ccu`           | -       | 运行 Claude Code 用量分析工具 - [ccusage](https://github.com/ryoppippi/ccusage) |
 | `zcf ccr`           | -       | 打开 CCR (Claude Code Router) 管理菜单                                          |
+| `zcf config-switch` | `zcf cs` | Codex API 提供商切换工具 - 在官方登录和自定义提供商之间切换                        |
 | `zcf uninstall`     | -       | 交互式 Claude Code 配置和工具卸载程序                                            |
 | `zcf check-updates` | -       | 检查并更新 Claude Code、CCR 和 CCometixLine 的版本                              |
 
@@ -500,7 +567,7 @@ npx zcf -h
 # 查看版本
 npx zcf --version
 npx zcf -v
-````
+```
 
 #### 使用示例
 
@@ -526,6 +593,12 @@ npx zcf u -c en            # 使用缩写
 
 # 运行 Claude Code 用量分析工具（由 ccusage 提供支持）
 npx zcf ccu               # 每日用量（默认），或使用: monthly, session, blocks
+
+# Codex API 提供商切换（v3.0.0+ 新增）
+npx zcf config-switch     # 交互式选择提供商
+npx zcf cs                # 使用缩写
+npx zcf cs provider-name  # 直接切换到指定提供商
+npx zcf cs --list         # 列出所有可用的提供商
 ```
 
 ## 📁 项目结构
@@ -715,6 +788,8 @@ ZCF 现已支持在 Android Termux 环境中运行：
 - Argolinhas (第一个 ko-fi 赞助者 ٩(•̤̀ᵕ•̤́๑))
 - r\*r (第一个不愿透露姓名的赞助者🤣)
 - \*\*康 (第一个 KFC 赞助者🍗)
+- \*东 (第一个咖啡赞助者☕️)
+- 炼\*3 (第一个termux 用户赞助者📱)
 - 16°C 咖啡 (我的好基友 🤪, 提供了 Claude Code max $200 套餐)
 
 ## 📄 许可证
